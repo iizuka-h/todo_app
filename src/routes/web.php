@@ -14,15 +14,9 @@
 use App\Task;
 use Illuminate\Http\Request;
 
-Route::get('/', function () {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
+Route::get('/task', 'TaskController@index');
 
-    return view('tasks', [
-        'tasks' => $tasks
-    ]);
-});
-
-Route::post('/task', function (Request $request) {
+Route::post('/newtask', function (Request $request) {
     $validator = Validator::make($request->all(), [
         'name' => 'required|max:255',
     ]);
@@ -41,8 +35,19 @@ Route::post('/task', function (Request $request) {
 
 });
 
-Route::delete('/task/{task}', function (Task $task) {
+Route::delete('/newtask/{task}', function (Task $task) {
     $task->delete();
 
     return redirect('/');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
